@@ -3,6 +3,8 @@ import time
 from bs4 import BeautifulSoup
 
 def collect_all_links():
+    """Функция возвращает список сформированных ссылок в формате https://you-anime.ru/characters?page=x
+    где x от 1 до 2391"""
     target = 'https://you-anime.ru/characters?page='
     urls = []
     for i in range(1,2392,1):
@@ -11,6 +13,7 @@ def collect_all_links():
     return urls
 
 def collect_all_characters_links(urls):
+    """функция принимает список ссылок, на каждой из которых находит ссылки на конкретных персонажей, возвращает их в качестве списка"""
     character_urls = []
     for url in urls:
         res = requests.get(url)
@@ -25,15 +28,9 @@ def collect_all_characters_links(urls):
     return character_urls
 
 def get_all_characters_names(character_page):
+    """Функция на каждой странице персонажа находит его имя, возвращает список всех имен"""
     res = requests.get(character_page)
     time.sleep(1)
     soup = BeautifulSoup(res.text, 'lxml')
     names = [name.text for name in soup.find_all('dd')]
     return names
-
-
-
-
-
-
-
