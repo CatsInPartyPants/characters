@@ -7,10 +7,12 @@ def start():
     for i in character_pages:
         name = get_all_characters_names(i)
         try:
-            data_for_record.append(f'{name[0]} xx {name[1]} xx {name[2]}')
+            data_for_record.append(f'Русское имя: {name[0]}\t Японское имя: {name[1]}\t Другое: {name[2]}')
         except:
             pass
-    print(data_for_record)
+    f = open('anime_characters.txt', 'w')
+    for name in data_for_record:
+        f.write(name + '\n')
 
 if __name__ == "__main__":
     start()
